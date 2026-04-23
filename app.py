@@ -1,5 +1,8 @@
 import requests
 
+def space():
+        print("")
+
 def get_joke(j_type):
         response = requests.get(f"https://v2.jokeapi.dev/joke/{j_type}")
         if response.status_code != 200:
@@ -13,12 +16,24 @@ def get_joke(j_type):
         }
 found = False
 while found == False:
-        user_type = input("Choose 1 of these joke types: Programming, Misc, Dark, Spooky, Christmas, or Pun (Case sensitive: Upper) ")
-        if user_type != "Programming" or "Misc" or "Dark" or "Spooky" or "Christmas" or "Pun":
-                print("This type does not exist")
-        else:
-                break
+        if found == False:
+                space()
+                user_type = input("Choose 1 of these joke types: Programming, Misc, Dark, Spooky, Christmas, or Pun (Case sensitive: Upper) ")
+                if user_type == "Programming" or "Misc" or "Dark" or "Spooky" or "Christmas" or "Pun":
+                        found = True
+                else:        
+                        print("This type does not exist")
+
 
 joke_data = get_joke(user_type)
-
-print(joke_data["question"], joke_data["answer"])
+space()
+if joke_data["1/2"] == "single":
+        print(joke_data["question"], joke_data["answer"])
+else:
+        guess = input(joke_data['question'])
+        if guess == joke_data['answer']:
+                print("How did you know...?")
+        else:
+                print("Ah you suck! This was the answer:")
+                print(joke_data['answer'])
+space()
