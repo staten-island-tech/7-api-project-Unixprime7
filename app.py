@@ -8,10 +8,11 @@ def get_joke(j_type):
         if response.status_code != 200:
                 print("Error fetching data!")
         data = response.json()
+        print(data)
         return {
                 "type": data["category"],
                 "1/2": data['type'],
-                "question": data["setup"],
+                "question": data["setup"] or data["joke"],
                 "answer": data["delivery"]
         }
 found = False
@@ -28,9 +29,14 @@ while found == False:
 joke_data = get_joke(user_type)
 space()
 if joke_data["1/2"] == "single":
+        print("This is a single part joke:")
+        space()
         print(joke_data["question"], joke_data["answer"])
 else:
-        guess = input(joke_data['question'])
+        print("This is a two-part joke:")
+        space()
+        print("Take your best guess as to what the answer could be...")
+        guess = input(f"{joke_data['question']} ")
         if guess == joke_data['answer']:
                 print("How did you know...?")
         else:
