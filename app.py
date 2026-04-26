@@ -9,10 +9,14 @@ def get_joke(j_type):
                 print("Error fetching data!")
         data = response.json()
         print(data)
+        if data['type'] == 'single':
+                question = data['joke']
+        else:
+                question = data['setup']
         return {
                 "type": data["category"],
                 "1/2": data['type'],
-                "question": data["setup"] or data["joke"],
+                "question": question,
                 "answer": data["delivery"]
         }
 found = False
