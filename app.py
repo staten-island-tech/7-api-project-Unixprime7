@@ -1,4 +1,5 @@
 import requests
+import tkinter as tk
 
 def space():
         print("")
@@ -11,13 +12,15 @@ def get_joke(j_type):
         print(data)
         if data['type'] == 'single':
                 question = data['joke']
+                answer = 'none'
         else:
                 question = data['setup']
+                answer = data['delivery']
         return {
                 "type": data["category"],
                 "1/2": data['type'],
                 "question": question,
-                "answer": data["delivery"]
+                "answer": answer
         }
 found = False
 while found == False:
@@ -35,7 +38,7 @@ space()
 if joke_data["1/2"] == "single":
         print("This is a single part joke:")
         space()
-        print(joke_data["question"], joke_data["answer"])
+        print(joke_data["question"])
 else:
         print("This is a two-part joke:")
         space()
